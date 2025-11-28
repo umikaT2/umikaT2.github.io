@@ -427,21 +427,21 @@
 
         <main class="main-content">
 
-            <nav class="tab-nav">
-                <div class="tab-item" data-target="overview">Overview</div>
-                <div class="tab-item active" data-target="repositories">
+            <nav class="tab-nav" role="tablist" aria-label="Profile navigation">
+                <div class="tab-item" id="tab-overview" role="tab" aria-selected="false" tabindex="0" data-target="overview">Overview</div>
+                <div class="tab-item active" id="tab-repositories" role="tab" aria-selected="true" tabindex="0" data-target="repositories">
                     Repositories <span class="counter">42</span>
                 </div>
-                <div class="tab-item" data-target="projects">Projects</div>
-                <div class="tab-item" data-target="packages">Packages</div>
-                <div class="tab-item" data-target="stars">Stars <span class="counter">105</span></div>
+                <div class="tab-item" id="tab-projects" role="tab" aria-selected="false" tabindex="0" data-target="projects">Projects</div>
+                <div class="tab-item" id="tab-packages" role="tab" aria-selected="false" tabindex="0" data-target="packages">Packages</div>
+                <div class="tab-item" id="tab-stars" role="tab" aria-selected="false" tabindex="0" data-target="stars">Stars <span class="counter">105</span></div>
             </nav>
 
-            <section class="tab-section" data-tab="overview">
+            <section class="tab-section" role="tabpanel" aria-labelledby="tab-overview" data-tab="overview">
                 <p style="color: var(--color-text-secondary);">Select a tab to view more details about Developer One's work.</p>
             </section>
 
-            <section class="tab-section active" data-tab="repositories">
+            <section class="tab-section active" role="tabpanel" aria-labelledby="tab-repositories" data-tab="repositories">
                 <h3 class="section-title">Pinned</h3>
                 <div class="pinned-grid">
                     <div class="repo-card">
@@ -537,7 +537,7 @@
                 </div>
             </section>
 
-            <section class="tab-section" data-tab="projects">
+            <section class="tab-section" role="tabpanel" aria-labelledby="tab-projects" data-tab="projects">
                 <h3 class="section-title">Projects board</h3>
                 <div class="projects-board">
                     <div class="project-column">
@@ -630,33 +630,48 @@
                 </div>
             </section>
 
-            <section class="tab-section" data-tab="packages">
+            <section class="tab-section" role="tabpanel" aria-labelledby="tab-packages" data-tab="packages">
                 <p style="color: var(--color-text-secondary);">Packages view is coming soon.</p>
             </section>
 
-            <section class="tab-section" data-tab="stars">
+            <section class="tab-section" role="tabpanel" aria-labelledby="tab-stars" data-tab="stars">
                 <p style="color: var(--color-text-secondary);">Starred repositories will appear here.</p>
             </section>
         </main>
     </div>
 
     <script>
-        // Tab switching
+        // Tab switching with accessibility helpers
         const tabs = document.querySelectorAll('.tab-item');
         const sections = document.querySelectorAll('.tab-section');
 
+        function setActiveTab(target) {
+            tabs.forEach(t => {
+                const isActive = t.dataset.target === target;
+                t.classList.toggle('active', isActive);
+                t.setAttribute('aria-selected', isActive);
+                t.tabIndex = isActive ? 0 : -1;
+            });
+
+            sections.forEach(section => {
+                const isActive = section.dataset.tab === target;
+                section.classList.toggle('active', isActive);
+                section.hidden = !isActive;
+            });
+        }
+
         tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.dataset.target;
-
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                sections.forEach(section => {
-                    section.classList.toggle('active', section.dataset.tab === target);
-                });
+            tab.addEventListener('click', () => setActiveTab(tab.dataset.target));
+            tab.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setActiveTab(tab.dataset.target);
+                }
             });
         });
+
+        // Ensure initial hidden state aligns with default active tab
+        setActiveTab(document.querySelector('.tab-item.active')?.dataset.target || 'repositories');
     </script>
 </body>
 </html>
