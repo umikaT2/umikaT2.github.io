@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tea & Gadgets Lab · umikaT2</title>
+  <meta name="description" content="茶与数码实验室 - umikaT2 的子页面" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* 子页面专属的小点缀，不会破坏主主题 */
+    .lab-hero {
+      padding: 64px 0 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .lab-hero .lab-bg {
+      position:absolute; inset:-40px -10% 0;
+      background:
+        radial-gradient(500px 260px at 10% 10%, rgba(124,155,255,.28), transparent 62%),
+        radial-gradient(600px 300px at 90% 0%, rgba(124,255,214,.24), transparent 60%),
+        radial-gradient(700px 420px at 50% 80%, rgba(255,210,124,.12), transparent 60%);
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .lab-title {
+      font-size: 40px;
+      margin: 6px 0 8px;
+      letter-spacing: -.4px;
+    }
+    .lab-sub {
+      color: var(--muted);
+      max-width: 60ch;
+      font-size: 17px;
+    }
+
+    .lab-grid{
+      display:grid; gap:12px;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: start;
+    }
+    @media (max-width: 900px){
+      .lab-grid{grid-template-columns:1fr}
+    }
+
+    .mini-kv{
+      display:grid; grid-template-columns: repeat(3,1fr);
+      gap:10px; margin-top:14px;
+    }
+    @media (max-width: 640px){
+      .mini-kv{grid-template-columns:1fr 1fr}
+    }
+    .mini-kv .kv{
+      padding:12px; border-radius:14px;
+      background:var(--card);
+      border:1px solid color-mix(in oklab, var(--card) 75%, transparent);
+    }
+    .kv .big{font-weight:900; font-size:18px}
+    .kv .small{color:var(--muted); font-size:12px}
+
+    .timeline{
+      display:grid; gap:10px; margin-top:6px;
+    }
+    .tl-item{
+      display:grid; grid-template-columns: 110px 1fr; gap:10px;
+      padding:12px; border-radius:14px;
+      background:var(--card);
+      border:1px solid color-mix(in oklab, var(--card) 75%, transparent);
+    }
+    .tl-time{color:var(--muted); font-size:13px; padding-top:2px}
+    .tl-title{font-weight:800}
+    .tl-desc{color:var(--text); opacity:.9; font-size:14px}
+
+    .lab-note{
+      font-size:14px; color:var(--muted);
+      border-left:3px solid var(--brand);
+      padding-left:10px; margin-top:6px;
+    }
+
+    .floaty{
+      animation: floaty 4.5s ease-in-out infinite;
+    }
+    @keyframes floaty{
+      0%,100%{transform: translateY(0)}
+      50%{transform: translateY(-6px)}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 顶部导航沿用主站 -->
+  <header class="nav">
+    <a class="logo" href="index.html">umikaT2</a>
+    <nav class="menu">
+      <a href="index.html#about">About</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="#logs">Logs</a>
+      <button id="themeBtn" class="theme-btn" aria-label="toggle theme">
+        <span class="sun">☀</span><span class="moon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Lab Hero -->
+    <section class="lab-hero">
+      <div class="lab-bg"></div>
+      <div class="container lab-grid">
+        <div>
+          <p class="badge floaty">Side Quest · Lab</p>
+          <h1 class="lab-title">茶与数码实验室 ☕⚙️</h1>
+          <p class="lab-sub">
+            这里是 umikaT2 的“随手试验区”。记录一些数码玩具评测、网页小实验、AI 小点子，还有喝茶时突然冒出来的灵感。
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="index.html">← 返回主页</a>
+            <a class="btn ghost" href="#works">看看最近实验</a>
+          </div>
+
+          <div class="mini-kv">
+            <div class="kv">
+              <div class="big">Gadgets</div>
+              <div class="small">硬件 / 外设 / 小工具</div>
+            </div>
+            <div class="kv">
+              <div class="big">Web Toys</div>
+              <div class="small">交互 / 动效 / UI</div>
+            </div>
+            <div class="kv">
+              <div class="big">AI Notes</div>
+              <div class="small">模型 / 提示词 / 实验</div>
+            </div>
+          </div>
+
+          <p class="lab-note">
+            小提示：你可以把每次实验的链接/截图放到下面卡片里，慢慢长成一个超酷的“实验室”主页喵。
+          </p>
+        </div>
+
+        <aside class="card">
+          <h3>本周主题</h3>
+          <p class="muted">
+            “轻量但有质感的个人站点” + “小工具可视化”。  
+            目标是把灵感变成可以分享的东西。
+          </p>
+
+          <hr style="border:none;border-top:1px dashed var(--card);margin:12px 0">
+
+          <h3>快速入口</h3>
+          <div style="display:grid;gap:8px">
+            <a class="link" href="index.html#projects">主页项目区 →</a>
+            <a class="link" href="https://github.com/umikaT2" target="_blank">GitHub Profile →</a>
+            <a class="link" href="#logs">实验日志 →</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Works -->
+    <section id="works" class="section">
+      <div class="container">
+        <h2 class="section-title">最近的实验</h2>
+        <p class="section-sub">自由发挥区：你可以持续往里加卡片～</p>
+
+        <div class="proj-grid">
+          <article class="proj card">
+            <div class="proj-head">
+              <h3>键盘手感小测</h3>
+              <span class="proj-tag">New</span>
+            </div>
+            <p class="muted">
+              对比几套轴体/键帽/消音方案的手感与声音，整理成可复用的选择指南。
+            </p>
+            <div class="proj-meta">
+              <span>🛠️ Topic: Peripherals</span>
+              <span>🎧 Output: Sound / Feel Notes</span>
+            </div>
+            <div class="proj-actions">
+              <a class="link" href="#" target="_blank">记录链接 →</a>
+            </div>
+          </article>
+
+          <article class="proj card">
+            <div class="proj-head">
+              <h3>一个会呼吸的按钮</h3>
+            </div>
+            <p class="muted">
+              试做“轻动效但不打扰”的 UI 小组件，用纯 CSS/JS 实现。
+            </p>
+            <div class="proj-meta">
+              <span>✨ Topic: Micro-interaction</span>
+              <span>📦 Output: UI Component</span>
+            </div>
+            <div class="proj-actions">
+              <a class="link" href="#" target="_blank">Demo →</a>
+              <a class="link" href="#" target="_blank">Code →</a>
+            </div>
+          </article>
+
+          <article class="proj card">
+            <div class="proj-head">
+              <h3>茶香浓度可视化</h3>
+            </div>
+            <p class="muted">
+              把不同茶叶的冲泡参数（克数/水温/时间/回甘）做成小图表。
+            </p>
+            <div class="proj-meta">
+              <span>🍵 Topic: Tea</span>
+              <span>📈 Output: Tiny Charts</span>
+            </div>
+            <div class="proj-actions">
+              <a class="link" href="#" target="_blank">看图表 →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logs / Timeline -->
+    <section id="logs" class="section">
+      <div class="container">
+        <h2 class="section-title">实验日志</h2>
+        <p class="section-sub">把点子变成可追踪的成长路线。</p>
+
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-time">2025-11-28</div>
+            <div>
+              <div class="tl-title">搭建实验室子页面</div>
+              <div class="tl-desc">
+                把所有随手实验集中到一个地方，方便迭代和展示。
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-time">2025-11-20</div>
+            <div>
+              <div class="tl-title">主页 UI 重设计</div>
+              <div class="tl-desc">
+                统一卡片与配色，支持暗/亮主题切换。
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-time">2025-11-10</div>
+            <div>
+              <div class="tl-title">收集要展示的项目</div>
+              <div class="tl-desc">
+                选出最想公开的 3~6 个项目，准备写成项目卡片。
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> umikaT2 · Tea & Gadgets Lab</p>
+      <a class="link" href="index.html">Back to home ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
